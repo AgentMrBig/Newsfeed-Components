@@ -27,3 +27,16 @@ class Article {
 */
 
 let articles;
+let articleInstances = [];
+articles = document.querySelectorAll('.article');
+
+articles.forEach((item, index, array) => {
+  articleInstances[index] = new Article(item);
+})
+
+articleInstances.forEach((item, index, array) => {
+  //console.log(item);
+})
+console.log(articles);
+console.log("");
+console.log(articleInstances);
