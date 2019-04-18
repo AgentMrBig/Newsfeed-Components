@@ -3,10 +3,11 @@
 class Article {
   constructor(domElement) {
     // assign this.domElement to the passed in domElement
-    this.domElement;
+    this.domElement = domElement;
     // create a reference to the ".expandButton" class. 
-    this.expandButton;
+    this.expandButton = this.domElement.expandButton;
     // Using your expandButton reference, update the text on your expandButton to say "expand"
+    this.expandButton = domElement.querySelector('.expandButton').innerHTML = "expand";
     
     // Set a click handler on the expandButton reference, calling the expandArticle method.
     
@@ -14,7 +15,9 @@ class Article {
 
   expandArticle() {
     // Using our reference to the domElement, toggle a class to expand or hide the article.
-
+    this.domElement.addEventListener("click" ,function(){
+      this.domElement.getElementsByTagName("p").classList.toggle("article-open");
+    })
   }
 }
 
@@ -22,7 +25,9 @@ class Article {
 
 - Select all classes named ".article" and assign that value to the articles variable.  
 
-- With your selection in place, now chain .forEach() on to the articles variable to iterate over the articles NodeList and create a new instance of Article by passing in each article as a parameter to the Article class.
+- With your selection in place, now chain .forEach() on to the articles variable to iterate over the 
+articles NodeList and create a new instance of Article by passing in each article as a parameter to 
+the Article class.
 
 */
 
@@ -31,12 +36,36 @@ let articleInstances = [];
 articles = document.querySelectorAll('.article');
 
 articles.forEach((item, index, array) => {
-  articleInstances[index] = new Article(item);
+  articleInstances[index] = new Article(articles[index]);
+  console.log(articles[index]);
+  console.log(articleInstances[index]);
 })
 
 articleInstances.forEach((item, index, array) => {
   //console.log(item);
 })
-console.log(articles);
-console.log("");
-console.log(articleInstances);
+//console.log(articles);
+//console.log("");
+//console.log(articleInstances);
+
+//console.log(articles[0].getElementsByClassName("expandButton"));
+
+var articleExpBtns = [];
+
+
+function setExpandButtons(buttonTxt, buttonClass){
+  
+  // articleExpBtns.forEach((item, index, array) => {
+  //   articleExpBtns[index].innerHTML = buttonTxt;
+  // })
+  articles.forEach((item, index, array) => {
+    articles[index].getElementsByClassName(buttonClass).innerHTML = buttonTxt;
+
+    //console.log(articles[index].getElementsByClassName(buttonClass))
+   
+  })
+  var xpndBtns = document.querySelectorAll('.expandButton');
+}
+
+
+setExpandButtons('HEY', "expandButton");
