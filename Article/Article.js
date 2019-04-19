@@ -10,15 +10,16 @@ class Article {
     this.expandButton = domElement.querySelector('.expandButton').innerHTML = "expand";
     
     // Set a click handler on the expandButton reference, calling the expandArticle method.
+    this.expandButton = domElement.querySelector('.expandButton').addEventListener('click', this.expandArticle.bind(this));
     
   }
 
   expandArticle() {
     // Using our reference to the domElement, toggle a class to expand or hide the article.
-    this.domElement.addEventListener("click" ,function(){
-      this.domElement.getElementsByTagName("p").classList.toggle("article-open");
-    })
+    this.domElement.classList.toggle('article-open');
+
   }
+
 }
 
 /* START HERE: 
@@ -37,35 +38,12 @@ articles = document.querySelectorAll('.article');
 
 articles.forEach((item, index, array) => {
   articleInstances[index] = new Article(articles[index]);
-  console.log(articles[index]);
-  console.log(articleInstances[index]);
 })
 
-articleInstances.forEach((item, index, array) => {
-  //console.log(item);
-})
-//console.log(articles);
-//console.log("");
-//console.log(articleInstances);
-
-//console.log(articles[0].getElementsByClassName("expandButton"));
-
-var articleExpBtns = [];
-
-
-function setExpandButtons(buttonTxt, buttonClass){
-  
-  // articleExpBtns.forEach((item, index, array) => {
-  //   articleExpBtns[index].innerHTML = buttonTxt;
-  // })
+function getArticleContent(){
   articles.forEach((item, index, array) => {
-    articles[index].getElementsByClassName(buttonClass).innerHTML = buttonTxt;
-
-    //console.log(articles[index].getElementsByClassName(buttonClass))
-   
+    var numP = articles[index].getElementsByTagName('p').length;
   })
-  var xpndBtns = document.querySelectorAll('.expandButton');
 }
 
-
-setExpandButtons('HEY', "expandButton");
+getArticleContent();
